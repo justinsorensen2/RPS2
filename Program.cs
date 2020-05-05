@@ -13,7 +13,7 @@ namespace RPS2
       //create var to hold invalid entry string
       var invalid = "That is not a valid selection.";
       //var to hold valid rps selections
-      var rps = "Valid entries are rock, paper, or scissors.";
+      var rps = "Valid entries are rock, paper, scissors, lizard, or spock.";
       //var to hold valid y or n
       var yOrN = "Valid entries are y (yes) or n (no).";
       //var to hold valid diff string
@@ -58,7 +58,7 @@ namespace RPS2
         while (!rpsIsValid)
         {
           playerSelection = Console.ReadLine().ToLower();
-          if (playerSelection != "rock" && playerSelection != "paper" && playerSelection != "scissors")
+          if (playerSelection != "rock" && playerSelection != "paper" && playerSelection != "scissors" && playerSelection != "lizard" && playerSelection != "spock")
           {
             Console.WriteLine($"{invalid}");
             Console.WriteLine($"{rps} Please try again.");
@@ -80,10 +80,15 @@ namespace RPS2
           {
             cpuSelection = "rock";
           }
-          else
+          else if (playerSelection == "scissors")
           {
             cpuSelection = "paper";
           }
+          else if (playerSelection == "lizard")
+          {
+            cpuSelection = "spock";
+          }
+          else { cpuSelection = "rock"; }
         }
         else if (difficulty == "i")
         {
@@ -95,9 +100,17 @@ namespace RPS2
           {
             cpuSelection = "scissors";
           }
-          else
+          else if (playerSelection == "scissors")
           {
             cpuSelection = "rock";
+          }
+          else if (playerSelection == "lizard")
+          {
+            cpuSelection = "rock";
+          }
+          else
+          {
+            cpuSelection = "lizard";
           }
         }
         else
@@ -105,7 +118,7 @@ namespace RPS2
           //create new random instance
           Random rando = new Random();
           //set output for rando
-          int randOutput = rando.Next(1, 3);
+          int randOutput = rando.Next(1, 5);
           //set cpuSelection based on rando
           if (randOutput == 1)
           {
@@ -115,21 +128,39 @@ namespace RPS2
           {
             cpuSelection = "paper";
           }
-          else
+          else if (randOutput == 3)
           {
             cpuSelection = "scissors";
           }
+          else if (randOutput == 4)
+          {
+            cpuSelection = "lizard";
+          }
+          else { cpuSelection = "spock"; }
         }
 
         Console.WriteLine($"Player selected {playerSelection}. Computer selected {cpuSelection}.");
         //compare selections and display winner
         //player loss conditions
-        if ((cpuSelection == "rock" && playerSelection == "scissors") || (cpuSelection == "paper" && playerSelection == "rock") || (cpuSelection == "scissors" && playerSelection == "paper"))
+        if ((cpuSelection == "rock" && playerSelection == "scissors") ||
+         (cpuSelection == "paper" && playerSelection == "rock") ||
+          (cpuSelection == "scissors" && playerSelection == "paper") ||
+           (cpuSelection == "spock" && playerSelection == "rock") ||
+            (cpuSelection == "spock" && playerSelection == "scissors") ||
+             (cpuSelection == "lizard" && playerSelection == "paper") ||
+              (cpuSelection == "lizard" && playerSelection == "spock") ||
+              (cpuSelection == "rock" && playerSelection == "lizard") ||
+              (cpuSelection == "paper" && playerSelection == "spock") ||
+              (cpuSelection == "scissors" && playerSelection == "lizard"))
         {
           Console.WriteLine("Player lost.");
           //tie conditions
         }
-        else if ((cpuSelection == "scissors" && playerSelection == "scissors") || (cpuSelection == "rock" && playerSelection == "rock") || (cpuSelection == "paper" && playerSelection == "paper"))
+        else if ((cpuSelection == "scissors" && playerSelection == "scissors") ||
+         (cpuSelection == "rock" && playerSelection == "rock") ||
+          (cpuSelection == "paper" && playerSelection == "paper") ||
+          (cpuSelection == "lizard" && playerSelection == "lizard") ||
+          (cpuSelection == "spock" && playerSelection == "spock"))
         {
           Console.WriteLine("Tie game.");
         }
