@@ -21,4 +21,3 @@ Create a way for the user to choose a level of difficulty, normal, impossible, o
 Epic Mode
 
 You have read about rock, paper, scissors, but have you tried, rock paper scissors lizard spock. Modify your game to allow the extra options
-Your game is currently only 1 vs. 1, add the ability to add more computer or users players to the game
