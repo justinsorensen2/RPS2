@@ -8,7 +8,7 @@ namespace RPS2
     {
       Console.WriteLine("Welcome to Rock, Paper, Scissors!");
 
-      //create var to manage while loop
+      //create var to manage while loop and initialize
       var playing = true;
       //create var to hold invalid entry string
       var invalid = "That is not a valid selection.";
@@ -16,39 +16,109 @@ namespace RPS2
       var rps = "Valid entries are rock, paper, or scissors.";
       //var to hold valid y or n
       var yOrN = "Valid entries are y (yes) or n (no).";
+      //var to hold valid diff string
+      var diff = "Valid entries are e (easy), n (normal), or i (impossible).";
+      //create var to hold computer selection
+      var cpuSelection = "";
 
       while (playing)
       {
+
+        //var to hold difficulty and initial val
+        var difficulty = "norm";
+        //vars to hold isValid booleans and initial values
+        var rpsIsValid = false;
+        var ynIsValid = false;
+        var diffIsValid = false;
+        //var for playagain
+        var playAgain = "";
+        //set var to hold player choice
+        var playerSelection = "";
+        Console.WriteLine("Player, please choose a difficulty level.");
+        Console.WriteLine($"{diff}");
+
+        //error catching
+        while (!diffIsValid)
+        {
+          difficulty = Console.ReadLine().ToLower();
+          if (difficulty != "e" && difficulty != "n" && difficulty != "i")
+          {
+            Console.WriteLine($"{invalid}");
+            Console.WriteLine($"{diff} Please try again.");
+          }
+          else
+          {
+            diffIsValid = true;
+          }
+        }
         Console.WriteLine("Player, please enter your selection.");
         Console.WriteLine($"{rps}");
 
-        //set var to hold player choice
-        var playerSelection = Console.ReadLine().ToLower();
         //error catching
-        if (playerSelection != "rock" && playerSelection != "paper" && playerSelection != "scissors")
+        while (!rpsIsValid)
         {
-          Console.WriteLine($"{invalid}");
-          Console.WriteLine($"{rps} Please try again.");
           playerSelection = Console.ReadLine().ToLower();
+          if (playerSelection != "rock" && playerSelection != "paper" && playerSelection != "scissors")
+          {
+            Console.WriteLine($"{invalid}");
+            Console.WriteLine($"{rps} Please try again.");
+          }
+          else
+          {
+            rpsIsValid = true;
+          }
         }
-        //create var to hold computer selection
-        var cpuSelection = "RPS";
-        //create new random instance
-        Random rando = new Random();
-        //set output for rando
-        int randOutput = rando.Next(1, 3);
-        //set cpuSelection based on rando
-        if (randOutput == 1)
+
+        //difficulty logic
+        if (difficulty == "e")
         {
-          cpuSelection = "rock";
+          if (playerSelection == "rock")
+          {
+            cpuSelection = "scissors";
+          }
+          else if (playerSelection == "paper")
+          {
+            cpuSelection = "rock";
+          }
+          else
+          {
+            cpuSelection = "paper";
+          }
         }
-        else if (randOutput == 2)
+        else if (difficulty == "i")
         {
-          cpuSelection = "paper";
+          if (playerSelection == "rock")
+          {
+            cpuSelection = "paper";
+          }
+          else if (playerSelection == "paper")
+          {
+            cpuSelection = "scissors";
+          }
+          else
+          {
+            cpuSelection = "rock";
+          }
         }
         else
         {
-          cpuSelection = "scissors";
+          //create new random instance
+          Random rando = new Random();
+          //set output for rando
+          int randOutput = rando.Next(1, 3);
+          //set cpuSelection based on rando
+          if (randOutput == 1)
+          {
+            cpuSelection = "rock";
+          }
+          else if (randOutput == 2)
+          {
+            cpuSelection = "paper";
+          }
+          else
+          {
+            cpuSelection = "scissors";
+          }
         }
 
         Console.WriteLine($"Player selected {playerSelection}. Computer selected {cpuSelection}.");
@@ -71,13 +141,19 @@ namespace RPS2
 
         Console.WriteLine("Would you like to play again?");
         Console.WriteLine($"{yOrN}");
-        var playAgain = Console.ReadLine().ToLower();
         //error catching
-        if (playAgain != "y" && playAgain != "n")
+        while (!ynIsValid)
         {
-          Console.WriteLine($"{invalid}");
-          Console.WriteLine($"{yOrN}");
           playAgain = Console.ReadLine().ToLower();
+          if (playAgain != "y" && playAgain != "n")
+          {
+            Console.WriteLine($"{invalid}");
+            Console.WriteLine($"{yOrN}");
+          }
+          else
+          {
+            ynIsValid = true;
+          }
         }
         //determine what to do based on input - replay or not
         if (playAgain == "y")
