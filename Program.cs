@@ -169,7 +169,7 @@ namespace RPS2
           Console.WriteLine("Player wins!");
         }
 
-
+        //ask if playing while loop should continue
         Console.WriteLine("Would you like to play again?");
         Console.WriteLine($"{yOrN}");
         //error catching
