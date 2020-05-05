@@ -25,7 +25,7 @@ namespace RPS2
         //set var to hold player choice
         var playerSelection = Console.ReadLine().ToLower();
         //error catching
-        if (playerSelection == "rock" && playerSelection != "paper" && playerSelection != "scissors")
+        if (playerSelection != "rock" && playerSelection != "paper" && playerSelection != "scissors")
         {
           Console.WriteLine($"{invalid}");
           Console.WriteLine($"{rps} Please try again.");
@@ -42,7 +42,7 @@ namespace RPS2
         {
           cpuSelection = "rock";
         }
-        else if (randOutput == )
+        else if (randOutput == 2)
         {
           cpuSelection = "paper";
         }
